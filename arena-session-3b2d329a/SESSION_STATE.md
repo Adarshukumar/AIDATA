@@ -8,51 +8,42 @@
 | Branch | `arena/3b2d329a-aidata` |
 | Repo | `Adarshukumar/AIDATA` |
 | Base commit | `ca68b43418a65df806e498797d7665cba2af0a46` |
-| Last log entry | `logs/0004-audit-pipeline.md` |
-| Current phase | **P3 — audit of `Adarshukumar/Python`** |
-| Status | 🟡 waiting on API quota reset (core: 0/5150, resets 2026-10-14T17:31Z) |
-| Updated (UTC) | 2026-10-14T17:17Z |
+| Last log entry | `logs/0005-first-full-report.md` |
+| Current phase | **P3 done** → P5 (memory consolidation + resume drill) |
+| Status | 🟢 active — audit complete, 0 unresolved files |
+| Updated (UTC) | 2026-10-14T17:41Z |
 
-## Last done (LOG-0004)
+## Last done (LOG-0005)
 
-- Built the whole audit pipeline as reproducible scripts in `artifacts/scripts/`:
-  `audit_clone_heads.sh` (v2, partial clones → HEAD trees), `audit_classify.py`,
-  `audit_probe.sh`, plus the failed v1 `audit_python_repo.py` kept for the record.
-- Three failures fixed and documented in `notes/lessons.md` (API quota burn, rev-list hang
-  in blobless clone, git C-quoting of a Cyrillic path).
-- **Local classification of all 9,007 files is DONE** (`/tmp/audit/out/classified.csv`):
-  `COPY_IDENTICAL` 8,739 · `NEEDS_PROBE_OLD` 209 · `NEEDS_PROBE_GONE` 3 · `ORIGINAL` 56.
+- **The audit is finished and every one of the 9,007 files is explained:**
+  `COPY_IDENTICAL` 8,739 · `COPY_OLD_REV` 176 · `COPY_LINE_ENDINGS` 33 ·
+  `COPY_REMOVED_UP` 3 · `ORIGINAL` 56 · unexplained **0**.
+- Key finding: the 33 files that exist in no upstream object DB are not edits — they are
+  upstream content committed through a Windows `core.autocrlf` checkout (CRLF → LF);
+  stripping `\r` makes them byte-identical (verified per file).
+- License pass done: 4 folders with **no license upstream** (RED), 6 conditional
+  (AMBER: CC BY-SA, GPL, CC BY, custom, WTFPL), 20 MIT-family (GREEN).
+- Deliverables committed: `audit/AUDIT_REPORT.md`, `audit/files.csv` (9,007 rows),
+  `audit/originals.md`, `audit/modified-files.md`, `audit/licenses.md`, plus 6 scripts.
 
 ## In progress
 
-- Waiting for the GitHub API quota to reset (0 remaining; reset = epoch 1791999102 =
-  **2026-10-14T17:31:02Z**). Needed: ~260 calls for 212 file probes.
+- Wrapping up: updating `TASKS.json` + `logs/INDEX.md`, then the P5 memory consolidation.
 
 ## Next actions (in order)
 
-1. Verify quota: `gh api rate_limit --jq '.resources.core.remaining'` (must be ≥ 400).
-2. `bash arena-session-3b2d329a/artifacts/scripts/audit_probe.sh` → `/tmp/audit/out/probe_results.tsv`.
-3. Final classification → `audit/files.csv` + `audit/AUDIT_REPORT.md` + `audit/originals.md`
-   + `audit/modified-files.md` + `audit/licenses.md` (license pass needs `gh api repos/<up>`).
-4. LOG-0005/0006 entries, update `TASKS.json`, commit + push.
-5. Then T5: `memory/MEMORY.md` consolidation + cold-resume drill.
-
-## Scratch state (NOT in Git — will vanish if the sandbox dies)
-
-- `/tmp/audit/clones/*.git` — 27 partial clones, 91 MB (rebuildable in ~20 s by
-  `audit_clone_heads.sh`).
-- `/tmp/audit/out/head__*.tsv` — path→blob-sha maps (rebuildable, same script).
-- `/tmp/audit/out/classified.csv`, `need_probe.tsv` — rebuildable via `audit_classify.py`.
-- `/tmp/audit/out/probe_results.tsv` — **produced later; must be committed** (212 lines,
-  it is evidence for the report).
+1. Update `TASKS.json` (T3.4, T3.5 → done) and `logs/INDEX.md`; commit + push.
+2. `T5.1` Condense `memory/MEMORY.md` with the final verdict.
+3. `T5.2` Run the cold-resume drill (`skills/session-memory/references/recovery.md`) and
+   record the result honestly in a log entry.
+4. `T5.3` Hand-off summary to the user in chat.
 
 ## Open questions / user decisions pending
 
-- Should the Python repo get a `CREDITS.md` + corrected README (PR), or a strip-down to
-  own work only? (Not answered yet.)
-- Whether unlicensed sources (`30-Days-Of-Python`, `awesome-for-beginners`,
-  `build-your-own-x`, `python-cheatsheet`) should be removed from the Python repo.
+- Should `Adarshukumar/Python` get a `CREDITS.md` + corrected README (open a PR), or a
+  strip-down to own work only?
+- Remove the 4 unlicensed folders from that repo?
 
 ## Blocked
 
-- Nothing hard-blocked; API probe step is time-gated (17:31Z).
+- Nothing.

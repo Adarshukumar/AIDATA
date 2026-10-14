@@ -3,7 +3,7 @@
   "session": "3b2d329a",
   "branch": "arena/3b2d329a-aidata",
   "repo": "Adarshukumar/AIDATA",
-  "updated_at": "2026-10-14T17:17:00Z",
+  "updated_at": "2026-10-14T17:41:00Z",
   "statuses": [
     "todo",
     "in_progress",
@@ -95,15 +95,25 @@
       "id": "T3.4",
       "title": "Classify every non-identical file via upstream object-DB blob lookup",
       "phase": "P3-python-audit",
-      "status": "in_progress",
+      "status": "done",
       "started_at": "2026-10-14T17:16:00Z",
-      "note": "212 ambiguous files; API probe blocked until quota reset 17:31Z"
+      "note": "212 ambiguous files resolved: 176 old rev, 33 CRLF->LF, 3 removed upstream; 0 unexplained",
+      "finished_at": "2026-10-14T17:34:00Z",
+      "log": "logs/0005-first-full-report.md"
     },
     {
       "id": "T3.5",
       "title": "Deliverables: AUDIT_REPORT.md, files.csv, originals.md, modified-files.md, licenses.md",
       "phase": "P3-python-audit",
-      "status": "todo"
+      "status": "done",
+      "finished_at": "2026-10-14T17:40:00Z",
+      "artifacts": [
+        "arena-session-3b2d329a/audit/AUDIT_REPORT.md",
+        "arena-session-3b2d329a/audit/files.csv",
+        "arena-session-3b2d329a/audit/originals.md",
+        "arena-session-3b2d329a/audit/modified-files.md",
+        "arena-session-3b2d329a/audit/licenses.md"
+      ]
     },
     {
       "id": "T5.1",
@@ -119,6 +129,34 @@
       "finished_at": "2026-10-14T17:17:00Z",
       "artifacts": [
         "arena-session-3b2d329a/notes/lessons.md"
+      ]
+    },
+    {
+      "id": "T3.6",
+      "title": "Third-pass review of files unexplained by upstream history",
+      "phase": "P3-python-audit",
+      "status": "done",
+      "finished_at": "2026-10-14T17:40:00Z",
+      "note": "no files left unexplained; 0 rows needing manual review"
+    },
+    {
+      "id": "T3.8",
+      "title": "Explain zero-upstream-match files (line-ending hypothesis + proof)",
+      "phase": "P3-python-audit",
+      "status": "done",
+      "finished_at": "2026-10-14T17:33:00Z",
+      "artifacts": [
+        "arena-session-3b2d329a/artifacts/scripts/audit_lineendings.sh"
+      ]
+    },
+    {
+      "id": "T4.2",
+      "title": "License risk table per folder",
+      "phase": "P4-enrichment",
+      "status": "done",
+      "finished_at": "2026-10-14T17:40:00Z",
+      "artifacts": [
+        "arena-session-3b2d329a/audit/licenses.md"
       ]
     }
   ]
