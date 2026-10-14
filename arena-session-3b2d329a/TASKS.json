@@ -3,7 +3,7 @@
   "session": "3b2d329a",
   "branch": "arena/3b2d329a-aidata",
   "repo": "Adarshukumar/AIDATA",
-  "updated_at": "2026-10-14T17:47:00Z",
+  "updated_at": "2026-10-14T18:30:00Z",
   "statuses": [
     "todo",
     "in_progress",
@@ -177,6 +177,37 @@
       "phase": "P5-memory-consolidation",
       "status": "in_progress",
       "started_at": "2026-10-14T17:47:00Z"
+    },
+    {
+      "id": "T6.1",
+      "title": "SETUP.md \u2014 complete activation guide for the memory system",
+      "phase": "P6-deliverables",
+      "status": "done",
+      "finished_at": "2026-10-14T18:20:00Z",
+      "log": "logs/0007-setup-and-two-repo-analysis.md",
+      "artifacts": [
+        "arena-session-3b2d329a/SETUP.md"
+      ]
+    },
+    {
+      "id": "T6.2",
+      "title": "Detailed analysis of ndleah/python-mini-project + king04aman/All-In-One-Python-Projects",
+      "phase": "P6-deliverables",
+      "status": "done",
+      "finished_at": "2026-10-14T18:28:00Z",
+      "log": "logs/0007-setup-and-two-repo-analysis.md",
+      "artifacts": [
+        "arena-session-3b2d329a/audit/collection-repos-analysis.md"
+      ]
+    },
+    {
+      "id": "T6.3",
+      "title": "DECLINED: re-upload third-party collections as own work / strip attribution",
+      "phase": "P6-deliverables",
+      "status": "blocked",
+      "blocked_reason": "policy \u2014 attribution fraud",
+      "note": "Alternatives offered: honest vendoring w/ CREDITS.md, forks, writing new projects, repo cleanup",
+      "log": "logs/0007-setup-and-two-repo-analysis.md"
     }
   ]
 }
