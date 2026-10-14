@@ -7,9 +7,9 @@
 | Branch | `arena/732d199a-aidata` |
 | Repo | `AIDATA` |
 | Environment created | 2026-10-14T21:12:25Z by `bootstrap.sh` |
-| Last log entry | `0003-study-skills-library.md` |
-| Status | 🟡 working — building study skills + security eval |
-| Updated (UTC) | 2026-10-14T21:45Z |
+| Last log entry | `0004-security-audit-and-redteam-eval.md` |
+| Status | 🟢 done — study library, audit skill, red-team eval all committed |
+| Updated (UTC) | 2026-10-14T22:00Z |
 
 ## Last done
 
@@ -18,7 +18,8 @@
 ## In progress
 
 - LOG-0003 done: 88 study skills in `skills/` (generator `artifacts/build_study_skills.py`).
-- Next: LOG-0004 security half (`skills/agent-skill-security-audit/`, `security/redteam-eval/`), then `CREDITS.md`.
+- LOG-0004 done: `skills/agent-skill-security-audit/` (scanner), `security/redteam-eval/` (29 canary cases + runner), `CREDITS.md`.
+- Waiting for the user: which parts to extend (more subjects, a real agent for the red-team run).
 
 ## Next actions
 
