@@ -4,7 +4,7 @@
 | id | `0005` |
 | ts_utc | 2026-10-14T22:30Z |
 | phase | P2 — third-party integration |
-| status | 🟡 partial (checkpoint: plan + review) |
+| status | ✅ done (ECC vendored, activated for this repo with hooks; verified) |
 
 ## Task
 User: "[https://github.com/affaan-m/ecc] Add this … understand this and see this and active this also".
@@ -59,5 +59,17 @@ python3 skills/agent-skill-security-audit/scripts/scan_skill.py scripts/hooks sc
 - Profile `core`, because the user did not pick one. `full` is available later with `--profile full`.
 - Commit `.claude/` so the activation is visible in the repo. The trade-off is that the hooks travel with the repo.
 
+## Results (after install)
+- Step 1 `d7e66dd`: scanner fix + checkpoint. Step 2 `f0ad426`: `third_party/ecc/` = `git archive b92f181`, 4,615 files, 70 MB, LICENSE byte-identical to upstream, `NOTICE.md` added.
+- Step 3 install: `node /tmp/ecc/scripts/install-apply.js --target claude-project --profile core --enable-hooks`, run with cwd `/home/user/AIDATA`. Dry run and real run both show the root as `/home/user/AIDATA/.claude`. 811 files written. Exit 0.
+- `.claude/settings.json` (valid JSON): 27 hook commands on 8 events (PreToolUse 10, Stop 8, SessionStart 2, PostToolUse 2, PostToolUseFailure 2, UserPromptSubmit 1, PreCompact 1, SessionEnd 1). Each command is bound to `/home/user/AIDATA/.claude` via an encoded path.
+- Settings change to note: `includeCoAuthoredBy: false` (Claude Code will not add co-author trailers to commits).
+- Smoke test (hook command run by hand, with a JSON payload on stdin):
+  - benign `ls -la`: exit 0, allowed (stderr: a bootstrap notice about raw input).
+  - `rm -rf ~`: denied by the gateguard hook (`permissionDecision: deny`, "Destructive command detected").
+- Writes outside the repo: `~/.claude/ecc/state.db` (ECC's state database, created by the hooks). `~/.claude` itself was created at 21:32 and is otherwise empty. Remove it if you don't want ECC state on this machine.
+- Secret scan of `.claude/` (137 findings, mostly doc-style examples): no provider tokens, private keys or obfuscated exec.
+
 ## Next
-- Step 1 commit (scanner fix) → Step 2 vendor copy → Step 3 install → Step 4 verify → Step 5 commit and push.
+- Commit `.claude/` and this log, then push. Recommended follow-up: review `settings.json` and any hook you do not want.
+

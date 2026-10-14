@@ -8,8 +8,8 @@
 | Repo | `AIDATA` |
 | Environment created | 2026-10-14T21:12:25Z by `bootstrap.sh` |
 | Last log entry | `0005-add-and-activate-ecc.md` |
-| Status | 🟡 working — adding + activating ECC (LOG-0005) |
-| Updated (UTC) | 2026-10-14T22:30Z |
+| Status | 🟢 ECC added (`third_party/ecc/`) and active for this repo (`.claude/`, hooks on) |
+| Updated (UTC) | 2026-10-14T23:00Z |
 
 ## Last done
 
@@ -19,8 +19,8 @@
 
 - LOG-0003 done: 88 study skills in `skills/` (generator `artifacts/build_study_skills.py`).
 - LOG-0004 done: `skills/agent-skill-security-audit/` (scanner), `security/redteam-eval/` (29 canary cases + runner), `CREDITS.md`.
-- LOG-0005 in progress: ECC full copy to `third_party/ecc/` (MIT, keep LICENSE), project activation into `.claude/` with hooks (profile core).
-- Waiting for: nothing. Continue steps 2-5 of LOG-0005.
+- LOG-0005 done: ECC v2.2.3 (MIT) vendored unmodified in `third_party/ecc/`; activated in `.claude/` (profile core, hooks on, 27 hook commands); smoke-tested.
+- Note: `~/.claude/ecc/state.db` is outside the repo.
 
 ## Next actions
 

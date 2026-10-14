@@ -17,7 +17,9 @@ No third-party text or code was copied into these files.
 
 | Path | Upstream | Licence | Notes |
 |---|---|---|---|
-| `third_party/ecc/` | [affaan-m/ECC](https://github.com/affaan-m/ECC) at commit `b92f181` (v2.2.3) | MIT, © 2026 Affaan Mustafa. Licence kept at `third_party/ecc/LICENSE`. | Vendored unmodified. Provenance in `third_party/ecc/NOTICE.md`. Activated into `.claude/` (see LOG-0005). | Where a source influenced the design, it is credited below.
+| `third_party/ecc/` | [affaan-m/ECC](https://github.com/affaan-m/ECC) at commit `b92f181` (v2.2.3) | MIT, © 2026 Affaan Mustafa. Licence kept at `third_party/ecc/LICENSE`. | Vendored unmodified. Provenance in `third_party/ecc/NOTICE.md`. Activated into `.claude/` (see LOG-0005). |
+
+Where a source influenced the design, it is credited below.
 
 ## Sources consulted (read-only, for design and background)
 
