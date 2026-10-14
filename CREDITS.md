@@ -11,7 +11,13 @@ This repository keeps the owner's own work separate from third-party material. T
 | `skills/agent-skill-security-audit/` | Original audit skill and scanner (`scripts/scan_skill.py`) |
 | `security/redteam-eval/` | Original canary-based test cases, runner and README |
 
-No third-party text or code was copied into these files. Where a source influenced the design, it is credited below.
+No third-party text or code was copied into these files.
+
+## Third-party code vendored in this repository
+
+| Path | Upstream | Licence | Notes |
+|---|---|---|---|
+| `third_party/ecc/` | [affaan-m/ECC](https://github.com/affaan-m/ECC) at commit `b92f181` (v2.2.3) | MIT, © 2026 Affaan Mustafa. Licence kept at `third_party/ecc/LICENSE`. | Vendored unmodified. Provenance in `third_party/ecc/NOTICE.md`. Activated into `.claude/` (see LOG-0005). | Where a source influenced the design, it is credited below.
 
 ## Sources consulted (read-only, for design and background)
 
