@@ -9,6 +9,19 @@
 # restart, which clears .git/hooks/).
 set -euo pipefail
 
+ACTIVATE=0
+for arg in "$@"; do
+  case "$arg" in
+    --activate) ACTIVATE=1 ;;
+    -h|--help)
+      echo "usage: bash bootstrap.sh [--activate]"
+      echo "  (no flag)   create the session environment and the git hook"
+      echo "  --activate  also install ECC (third_party/ecc) into .claude/ with hooks on, profile core"
+      exit 0 ;;
+    *) echo "error: unknown option: $arg (try --help)" >&2; exit 2 ;;
+  esac
+done
+
 REPO="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 SESSION_DIR_NAME="${SESSION_DIR:-arena-session-3b2d329a}"
 HERE="$REPO/$SESSION_DIR_NAME"
@@ -296,6 +309,20 @@ EOF
 # ---------------------------------------------------------------- git hook
 echo "==> git hook"
 bash "$HERE/hooks/install.sh"
+
+if [ "$ACTIVATE" = 1 ]; then
+  echo "==> activate ECC (third_party/ecc -> .claude/, profile core, hooks on)"
+  ECC_SRC="$REPO/third_party/ecc"
+  command -v node >/dev/null 2>&1 || { echo "error: Node.js 18+ is required for --activate" >&2; exit 1; }
+  [ -f "$ECC_SRC/scripts/install-apply.js" ] || { echo "error: $ECC_SRC is missing; restore it from git" >&2; exit 1; }
+  if [ -f "$REPO/.claude/ecc/install-state.json" ]; then
+    echo "  keep    .claude/ (ECC already activated; to change it, see SETUP.md §8)"
+  else
+    (cd "$REPO" && node "$ECC_SRC/scripts/install-apply.js" --target claude-project --profile core --enable-hooks)
+    echo "  create  .claude/ (ECC activated; start a new Claude Code session to load the hooks)"
+  fi
+  echo
+fi
 
 echo
 echo "==> done: $created created, $kept kept"

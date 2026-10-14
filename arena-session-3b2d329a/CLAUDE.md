@@ -15,6 +15,8 @@
 7. **No secrets** in this folder, ever.
 8. **After a sandbox restart:** `git fetch && git status -sb` first, reconcile with
    `git reset --soft` (never `--hard`), then re-run `bootstrap.sh`.
+9. **Working agreement:** `SETUP.md` §9. Answer every question. Read typos and shorthand by their most
+   likely meaning and state the assumption. Ask only when a wrong guess is costly. The §9 limits always apply.
 
 **Log template**
 

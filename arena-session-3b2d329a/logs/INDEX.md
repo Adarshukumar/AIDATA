@@ -9,3 +9,4 @@ Newest at the bottom. One entry per logical step. **Never renumber, never rewrit
 | 0003 | [study-skills-library](0003-study-skills-library.md) | 2026-10-14T21:45Z | P1 | ✅ | 88 Agent Skills: 80 subject coaches (5 levels × 16 subjects) + 8 study methods + index |
 | 0004 | [security-audit-and-redteam-eval](0004-security-audit-and-redteam-eval.md) | 2026-10-14T22:00Z | P1 | ✅ | Agent-skill audit scanner + skill; 29-case canary red-team eval + runner; CREDITS.md |
 | 0005 | [add-and-activate-ecc](0005-add-and-activate-ecc.md) | 2026-10-14T22:30Z | P2 | ✅ | Reviewed affaan-m/ECC (MIT, 2.2.3); scanner false-positives fixed; plan for vendor + project activation with hooks |
+| 0006 | [setup-md-everything-and-activation](0006-setup-md-everything-and-activation.md) | 2026-10-14T23:30Z | P3 | ✅ | SETUP.md §7 inventory, §8 runbook, §9 working agreement; `bootstrap.sh --activate`; README + CLAUDE.md pointers |

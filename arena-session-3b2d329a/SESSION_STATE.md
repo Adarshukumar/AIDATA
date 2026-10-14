@@ -7,9 +7,9 @@
 | Branch | `arena/732d199a-aidata` |
 | Repo | `AIDATA` |
 | Environment created | 2026-10-14T21:12:25Z by `bootstrap.sh` |
-| Last log entry | `0005-add-and-activate-ecc.md` |
+| Last log entry | `0006-setup-md-everything-and-activation.md` |
 | Status | 🟢 ECC added (`third_party/ecc/`) and active for this repo (`.claude/`, hooks on) |
-| Updated (UTC) | 2026-10-14T23:00Z |
+| Updated (UTC) | 2026-10-14T23:30Z |
 
 ## Last done
 
@@ -21,6 +21,7 @@
 - LOG-0004 done: `skills/agent-skill-security-audit/` (scanner), `security/redteam-eval/` (29 canary cases + runner), `CREDITS.md`.
 - LOG-0005 done: ECC v2.2.3 (MIT) vendored unmodified in `third_party/ecc/`; activated in `.claude/` (profile core, hooks on, 27 hook commands); smoke-tested.
 - Note: `~/.claude/ecc/state.db` is outside the repo.
+- LOG-0006 done: SETUP.md §7 inventory, §8 runbook, §9 working agreement; `bootstrap.sh --activate` tested (real repo, fresh clone, bad flag, help); uninstall dry run = 811 files.
 
 ## Next actions
 
