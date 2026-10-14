@@ -1,0 +1,87 @@
+{
+  "schema": "arena-session-tasks/1",
+  "session": "3b2d329a",
+  "branch": "arena/3b2d329a-aidata",
+  "repo": "Adarshukumar/AIDATA",
+  "updated_at": "2026-10-14T16:35:00Z",
+  "statuses": ["todo", "in_progress", "blocked", "done"],
+  "tasks": [
+    {
+      "id": "T0.1",
+      "title": "Create session folder arena-session-3b2d329a/ in Adarshukumar/AIDATA",
+      "phase": "P0-bootstrap",
+      "status": "done",
+      "finished_at": "2026-10-14T16:35:00Z",
+      "log": "logs/0001-bootstrap.md",
+      "artifacts": ["arena-session-3b2d329a/README.md"]
+    },
+    {
+      "id": "T0.2",
+      "title": "Memory system: CLAUDE.md, SESSION_STATE.md, TASKS.json, logs/",
+      "phase": "P0-bootstrap",
+      "status": "done",
+      "finished_at": "2026-10-14T16:35:00Z",
+      "log": "logs/0001-bootstrap.md",
+      "artifacts": ["arena-session-3b2d329a/CLAUDE.md", "arena-session-3b2d329a/SESSION_STATE.md", "arena-session-3b2d329a/logs/"]
+    },
+    {
+      "id": "T1.1",
+      "title": "Fetch + read anthropics/claude-code (README, CLAUDE.md, plugin format, changelog)",
+      "phase": "P1-claude-code-study",
+      "status": "done",
+      "finished_at": "2026-10-14T16:33:00Z",
+      "log": "logs/0002-study-claude-code.md",
+      "artifacts": ["arena-session-3b2d329a/notes/claude-code-study.md"]
+    },
+    {
+      "id": "T1.3",
+      "title": "Adapt Claude Code conventions into this folder (commands/agents/skills/hooks)",
+      "phase": "P1-claude-code-study",
+      "status": "done",
+      "finished_at": "2026-10-14T16:35:00Z",
+      "log": "logs/0002-study-claude-code.md",
+      "artifacts": ["arena-session-3b2d329a/commands/", "arena-session-3b2d329a/agents/", "arena-session-3b2d329a/skills/", "arena-session-3b2d329a/hooks/"]
+    },
+    {
+      "id": "T3.1",
+      "title": "Inventory Adarshukumar/Python: tree, sizes, commits, licenses",
+      "phase": "P3-python-audit",
+      "status": "done",
+      "finished_at": "2026-10-14T16:20:00Z",
+      "log": "logs/0003-python-audit-inventory.md"
+    },
+    {
+      "id": "T3.2",
+      "title": "Map all 27 top-level folders to their upstream GitHub repos",
+      "phase": "P3-python-audit",
+      "status": "done",
+      "finished_at": "2026-10-14T16:35:00Z",
+      "artifacts": ["arena-session-3b2d329a/audit/upstream-map.md"]
+    },
+    {
+      "id": "T3.3",
+      "title": "Full blob-hash diff: his 9,007 files vs upstream HEAD trees",
+      "phase": "P3-python-audit",
+      "status": "in_progress",
+      "started_at": "2026-10-14T16:36:00Z"
+    },
+    {
+      "id": "T3.4",
+      "title": "Classify every non-identical file via upstream object-DB blob lookup",
+      "phase": "P3-python-audit",
+      "status": "todo"
+    },
+    {
+      "id": "T3.5",
+      "title": "Deliverables: AUDIT_REPORT.md, files.csv, originals.md, modified-files.md, licenses.md",
+      "phase": "P3-python-audit",
+      "status": "todo"
+    },
+    {
+      "id": "T5.1",
+      "title": "Consolidate memory/MEMORY.md; resume drill",
+      "phase": "P5-memory-consolidation",
+      "status": "todo"
+    }
+  ]
+}
