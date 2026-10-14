@@ -49,3 +49,16 @@
   - arena-session-3b2d329a/logs/INDEX.md
   - arena-session-3b2d329a/notes/lessons.md
 
+### 2026-10-14T19:30:58Z — 10 file(s) staged
+
+  - arena-session-3b2d329a/SESSION_STATE.md
+  - arena-session-3b2d329a/TASKS.json
+  - arena-session-3b2d329a/artifacts/curation/CREDITS.md
+  - arena-session-3b2d329a/artifacts/curation/PR_BODY_cleanup.md
+  - arena-session-3b2d329a/artifacts/curation/README.md
+  - arena-session-3b2d329a/artifacts/scripts/curate_python_repo.sh
+  - arena-session-3b2d329a/artifacts/scripts/vendor_collections.sh
+  - arena-session-3b2d329a/logs/0009-execution-plan-attribution-cleanup.md
+  - arena-session-3b2d329a/logs/0010-curation-prepared-blocked-on-access.md
+  - arena-session-3b2d329a/logs/INDEX.md
+

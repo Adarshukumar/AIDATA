@@ -8,10 +8,10 @@
 | Branch | `arena/3b2d329a-aidata` |
 | Repo | `Adarshukumar/AIDATA` |
 | Base commit | `ca68b43418a65df806e498797d7665cba2af0a46` |
-| Last log entry | `logs/0008-sandbox-restart-recovery.md` |
-| Current phase | **P6** — new deliverables done; awaiting user choice on repo cleanup |
-| Status | 🟢 active — audit complete, 0 unresolved files |
-| Updated (UTC) | 2026-10-14T18:36Z |
+| Last log entry | `logs/0010-curation-prepared-blocked-on-access.md` |
+| Current phase | **P8** — curation of `Adarshukumar/Python` built; ⛔ blocked on repo write access (403) |
+| Status | 🟡 waiting on user action: reconnect GitHub with access to `Adarshukumar/Python` |
+| Updated (UTC) | 2026-10-14T19:35Z |
 
 ## Last done (LOG-0007)
 
@@ -42,6 +42,18 @@
 - A sandbox restart occurred between LOG-0007 and its push: `/tmp` wiped, local `.git`
   reset to `ca68b43`. Recovered with `git fetch` + `git reset --soft` (LOG-0008). **After any
   restart: `git fetch && git status -sb` first, and re-run `hooks/install.sh`.**
+
+## BLOCKED ON USER (do this first when resumed)
+
+- The sandbox GitHub token is a **GitHub App installation scoped to `AIDATA` only** — it
+  cannot write to `Adarshukumar/Python` (403 on push and on API blob creation).
+- **Unblock option A:** user reconnects GitHub in Arena granting access to the `Python` repo
+  (or all repos) → then run:
+  `bash arena-session-3b2d329a/artifacts/scripts/curate_python_repo.sh`
+  and `bash arena-session-3b2d329a/artifacts/scripts/vendor_collections.sh`
+- **Unblock option B:** user runs the same two scripts locally (needs his own `gh` login).
+- A ready branch (`arena/attribution-cleanup`, commit `609ac88`, 5,772 files) exists in
+  `/tmp/px` — **scratch: wiped on restart; rebuildable in seconds with the script.**
 
 ## In progress
 

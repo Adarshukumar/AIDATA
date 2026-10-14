@@ -3,7 +3,7 @@
   "session": "3b2d329a",
   "branch": "arena/3b2d329a-aidata",
   "repo": "Adarshukumar/AIDATA",
-  "updated_at": "2026-10-14T18:36:00Z",
+  "updated_at": "2026-10-14T19:35:00Z",
   "statuses": [
     "todo",
     "in_progress",
@@ -216,6 +216,49 @@
       "status": "done",
       "finished_at": "2026-10-14T18:36:00Z",
       "log": "logs/0008-sandbox-restart-recovery.md"
+    },
+    {
+      "id": "T8.1",
+      "title": "Compute stars+license per upstream; define removal rules R1/R2",
+      "phase": "P8-python-curation",
+      "status": "done",
+      "finished_at": "2026-10-14T19:00:00Z",
+      "log": "logs/0010-curation-prepared-blocked-on-access.md"
+    },
+    {
+      "id": "T8.2",
+      "title": "Write CREDITS.md + honest README.md + PR body",
+      "phase": "P8-python-curation",
+      "status": "done",
+      "finished_at": "2026-10-14T19:20:00Z",
+      "artifacts": [
+        "arena-session-3b2d329a/artifacts/curation/CREDITS.md",
+        "arena-session-3b2d329a/artifacts/curation/README.md",
+        "arena-session-3b2d329a/artifacts/curation/PR_BODY_cleanup.md"
+      ]
+    },
+    {
+      "id": "T8.3",
+      "title": "Build cleanup branch locally (5772 files, 3236 removed)",
+      "phase": "P8-python-curation",
+      "status": "done",
+      "finished_at": "2026-10-14T19:30:00Z",
+      "note": "commit 609ac88 built in /tmp/px; not pushed"
+    },
+    {
+      "id": "T8.4",
+      "title": "Push cleanup PR to Adarshukumar/Python",
+      "phase": "P8-python-curation",
+      "status": "blocked",
+      "blocked_reason": "403 \u2014 sandbox token is a GitHub App installation scoped to AIDATA only; no write access to Adarshukumar/Python",
+      "unblocks": "user reconnects GitHub granting access to the Python repo, OR runs artifacts/scripts/curate_python_repo.sh locally"
+    },
+    {
+      "id": "T8.5",
+      "title": "Vendor ndleah + king04aman collections with attribution",
+      "phase": "P8-python-curation",
+      "status": "blocked",
+      "blocked_reason": "same 403; script ready: artifacts/scripts/vendor_collections.sh"
     }
   ]
 }
