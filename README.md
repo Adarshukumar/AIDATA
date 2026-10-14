@@ -162,7 +162,7 @@ their own READMEs — read those first.
 
 | Document | What's inside |
 |---|---|
-| [`SETUP.md`](./arena-session-3b2d329a/SETUP.md) | Complete activation guide: verification checklist, hook wiring, cheat-sheet, troubleshooting |
+| [`SETUP.md`](./arena-session-3b2d329a/SETUP.md) | **The setup prompt (verbatim) + how to work in this folder**, then the complete activation guide: verification, hook wiring, cheat-sheet, troubleshooting |
 | [`CLAUDE.md`](./arena-session-3b2d329a/CLAUDE.md) | Rules + environment facts for any agent working here |
 | [`SESSION_STATE.md`](./arena-session-3b2d329a/SESSION_STATE.md) | Current live state |
 | [`PLAN.md`](./arena-session-3b2d329a/PLAN.md) / [`TASKS.json`](./arena-session-3b2d329a/TASKS.json) | Plan and task status |

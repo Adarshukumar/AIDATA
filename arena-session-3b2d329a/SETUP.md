@@ -1,8 +1,119 @@
-# SETUP.md — how to activate and use this session-memory system
+# SETUP.md — the setup prompt, and how to work in this folder
 
 Everything in `arena-session-3b2d329a/` is **plain files in Git**. There is no service to
-start, no database, no install step that can fail silently. This document is the complete
-setup: what to run, in what order, and what to expect.
+start, no database, no install step that can fail silently.
+
+This file has two jobs:
+
+1. **§0 — the prompt that created this folder** (verbatim), and what each line actually
+   means in practice.
+2. **§0b — how to work in it**: the instructions for anyone (agent or human) who joins.
+3. **§1 onward** — the full operational guide: activation, verification, recovery,
+   troubleshooting.
+
+---
+
+## §0 — The setup prompt (verbatim)
+
+This is the instruction that created this folder, quoted exactly as it was written:
+
+> okiew look do crete a folder in our main reposrity as this branch
+>
+> for now do cretate a folder For this session name it soemthing..
+>
+> look u have to make sure ur eveything thinking and all tasks and all the things is going
+> to be pushed in that folder... evert command all of the things what u r doing pushing
+> inside it make sure to push it and commit it direclty no wait in real time... okk ??
+>
+> so that even we got disconnected can we recover our memory...
+>
+> and u will take that memory.. and in that folder work it in nice struturing system..
+>
+> and do make ur self work entirely as a [https://github.com/anthropics/claude-code](https://github.com/anthropics/claude-code)
+> adapt its nautre and sense all the featuring and all the working pushed here..
+>
+> and one more thing ur eveystepis going to pushed here as what does the task was and how u
+> r completeing it and whats ur plan and what thinsg happenming and how its eveythign going
+> okk ??
+>
+> see everythin... in depend manner do first ebeire claude... first then do this task...
+>
+> and do tell him how to work.. in it
+
+### What each line means in practice
+
+| The prompt says | Implemented as |
+|---|---|
+| "create a folder… for this session, name it something" | `arena-session-3b2d329a/` — named after the session id in the branch (`arena/3b2d329a-aidata`) |
+| "everything… every command… pushed in that folder… commit directly, no wait, in real time" | The working loop in §0b: one log entry + one commit + one push per step. Nothing is batched for later. |
+| "so that even if we get disconnected we can recover our memory" | `SESSION_STATE.md` (resume pointer) + append-only `logs/` + `TASKS.json`. The drill in §7 was run against a fresh clone and passed (LOG-0006); a real sandbox restart was recovered with zero loss (LOG-0008). |
+| "work it in a nice structuring system" | Fixed layout: logs · memory · notes · commands · agents · skills · hooks · artifacts · audit |
+| "work entirely as claude-code, adapt its nature and features" | Study of that repo is in `notes/claude-code-study.md`; its shapes are mirrored here: `CLAUDE.md` memory file, YAML-frontmatter commands, subagents, skills, hooks with the exit-code contract (0 = allow, 2 = block), plugin manifest |
+| "every step pushed: what the task was, how you complete it, what's the plan, what's happening" | The log template (`skills/session-memory/references/logging-format.md`): Task · Plan · verbatim Commands · Results · Decisions · Next |
+| "see everything, in a dependent manner — first beware claude, first, then do this task" | Phase order in `PLAN.md`: P0 bootstrap → P1 Claude Code study → P2 memory guarantee → then the actual tasks (P3 audit onward) |
+| "and do tell him how to work in it" | §0b below — the same instructions a new agent gets on arrival |
+
+---
+
+## §0b — How to work in this folder
+
+**If you are an agent joining this session, do these five things before anything else:**
+
+```
+1. READ   CLAUDE.md                 → the rules and the environment facts
+2. READ   SESSION_STATE.md          → last done · in progress · next · blocked
+3. READ   logs/INDEX.md, then the newest logs/000N-*.md in full
+                                    → the verbatim commands and results of the last work
+4. READ   TASKS.json                → the machine-readable task truth
+5. WORK   the loop below, one step at a time
+```
+
+**The loop — this is the whole method:**
+
+```
+DO the step
+   ↓
+write logs/NNNN-slug.md             (next free number; template in skills/session-memory/references/logging-format.md)
+   ↓
+update SESSION_STATE.md             (last done / in progress / next actions / blocked)
+update TASKS.json  (+ logs/INDEX.md row)
+   ↓
+git add -A
+git commit -m "session(NNNN): <slug>"
+git push origin arena/3b2d329a-aidata
+```
+
+**Rules that are not optional:**
+
+1. **Real time.** One logical step = one log entry = one commit = one push. Never batch.
+2. **Verbatim commands** in the log, raw results — not summaries of summaries.
+3. **Log failures too.** A failed command with its error is the most useful line after a
+   disconnect. See `logs/0004` and `notes/lessons.md`.
+4. **Never rewrite** a published log entry, and never renumber. Corrections are new entries
+   that cite the old one.
+5. **`SESSION_STATE.md` must never be stale.** If it is, that is a bug: fix it in the same
+   commit as the log entry that exposed it.
+6. **Before anything long or risky** (a clone, 100+ API calls): write what you are about to
+   attempt, commit it, *then* attempt it — the checkpoint variant
+   (`commands/commit-memory.md`).
+7. **No secrets** in this folder, ever.
+8. **After a sandbox restart:** `git fetch && git status -sb` first (local `.git` may be
+   behind origin), reconcile with `reset --soft` — never `--hard` — then re-run
+   `hooks/install.sh` (hooks live in `.git/`, which is not part of the tree).
+
+**Using the commands** (`commands/` — Claude Code format):
+
+| File | Purpose |
+|---|---|
+| `resume.md` | rebuild context from Git alone and continue |
+| `status.md` | one screen: state + tasks + last log + uncommitted work |
+| `log.md` | write the next numbered entry and commit it |
+| `commit-memory.md` | checkpoint before a long/risky operation |
+| `audit-python-repo.md` | re-run the provenance audit |
+
+Copy `commands/` into `.claude/commands/` to use them as slash commands in Claude Code;
+paste them into any other agent's chat as prompts; run the listed commands by hand if you
+are a human. The files are runbooks either way.
 
 ---
 

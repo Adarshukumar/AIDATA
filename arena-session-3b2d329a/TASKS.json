@@ -3,7 +3,7 @@
   "session": "3b2d329a",
   "branch": "arena/3b2d329a-aidata",
   "repo": "Adarshukumar/AIDATA",
-  "updated_at": "2026-10-14T21:30:00Z",
+  "updated_at": "2026-10-14T21:45:00Z",
   "statuses": [
     "todo",
     "in_progress",
@@ -311,6 +311,17 @@
       "log": "logs/0013-main-readme-setup-guide.md",
       "artifacts": [
         "README.md"
+      ]
+    },
+    {
+      "id": "T9.2",
+      "title": "SETUP.md: include the setup prompt verbatim + how-to-work section",
+      "phase": "P9-documentation",
+      "status": "done",
+      "finished_at": "2026-10-14T21:45:00Z",
+      "log": "logs/0014-setup-prompt.md",
+      "artifacts": [
+        "arena-session-3b2d329a/SETUP.md"
       ]
     }
   ]
