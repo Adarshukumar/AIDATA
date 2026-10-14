@@ -1,8 +1,0 @@
-{
-  "schema": "arena-session-tasks/1",
-  "branch": "arena/3b2d329a-aidata",
-  "repo": "Adarshukumar/AIDATA",
-  "updated_at": "2026-10-14T21:02:34Z",
-  "statuses": ["todo", "in_progress", "blocked", "done"],
-  "tasks": []
-}

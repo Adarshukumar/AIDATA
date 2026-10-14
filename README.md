@@ -1,77 +1,38 @@
 <div align="center">
 
-# 🐍 AIDATA
+# AIDATA
 
-### My Python library — plus the setup file that builds the working environment
-
-![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Branch](https://img.shields.io/badge/branch-arena%2F3b2d329a--aidata-blueviolet?style=for-the-badge)
+**Everything in this repository is set up by one file.**
 
 </div>
 
----
-
-## 📚 `python-projects/` — the library
-
-| | What it is | Count |
-|---|---|---|
-| 🎓 | **My own lessons** — roadmap, numbered lesson files, cheatsheet, practice challenges | 54 files |
-| 🧩 | **Community collection** — [ndleah/python-mini-project](https://github.com/ndleah/python-mini-project) · MIT | 131 projects |
-| 📦 | **Community collection** — [king04aman/All-In-One-Python-Projects](https://github.com/king04aman/All-In-One-Python-Projects) · MIT | 65 projects |
-
-- **Index of everything:** [`python-projects/PROJECTS.md`](./python-projects/PROJECTS.md) — all 183 projects, grouped in 9 categories
-- **Who wrote what:** [`python-projects/CREDITS.md`](./python-projects/CREDITS.md) — every folder → upstream repo → license → authors
-- The two collections are **other people's work**, kept complete with their license files; my own files are [`python-projects/python-learning/`](./python-projects/python-learning)
+## Start here
 
 ```bash
-python python-projects/python-learning/01_hello_world.py     # my lessons, Python 3 only
+cat  SETUP.md          # the setup prompt, the rules, the working loop, recovery
+bash bootstrap.sh      # creates the whole working environment
 ```
 
----
+`SETUP.md` contains the setup prompt verbatim, the environment spec, how to work in it, the
+standing rules, and the recovery procedure. `bootstrap.sh` builds the environment
+(`arena-session-3b2d329a/`: memory, real-time log, state pointer, hooks) and installs a git
+hook that logs every commit automatically. Re-running it is safe — it never overwrites
+existing state.
 
-## ⚙️ `arena-session-3b2d329a/` — the working environment
-
-One file sets it up: **[`SETUP.md`](./arena-session-3b2d329a/SETUP.md)** — it contains the
-setup prompt verbatim, the rules, the working loop, and the bootstrap command.
+## Then
 
 ```bash
-bash arena-session-3b2d329a/bootstrap.sh      # creates/refreshes the environment
-cat  arena-session-3b2d329a/SESSION_STATE.md  # read this first after any break
+cat arena-session-3b2d329a/SESSION_STATE.md    # where things stand
+ls  arena-session-3b2d329a/logs/               # what happened so far
 ```
 
-`bootstrap.sh` creates the tree and starter files (`CLAUDE.md`, `SESSION_STATE.md`,
-`TASKS.json`, `logs/`, `memory/`, `notes/`, `artifacts/`, `commands/`, `agents/`, `skills/`,
-`hooks/`) and installs the **git pre-commit hook** that logs every commit automatically. It
-never overwrites existing state, so it is safe to re-run any time — that is also the fix
-after a sandbox restart, which clears `.git/hooks/`.
+## Contents
 
-| Document | What's inside |
+| Path | What it is |
 |---|---|
-| [`SETUP.md`](./arena-session-3b2d329a/SETUP.md) | The setup prompt, the environment spec, **how to work in it**, recovery, history map |
-| [`CLAUDE.md`](./arena-session-3b2d329a/CLAUDE.md) | The rules any agent follows here |
-| [`SESSION_STATE.md`](./arena-session-3b2d329a/SESSION_STATE.md) | Live pointer: last done · in progress · next · blocked |
-| [`logs/INDEX.md`](./arena-session-3b2d329a/logs/INDEX.md) | Every work-log entry, newest last |
+| `SETUP.md` | The whole setup: prompt, environment, rules, working loop, recovery, history map |
+| `bootstrap.sh` | Creates / refreshes the environment |
+| `arena-session-3b2d329a/` | The environment (created by `bootstrap.sh`) |
 
----
-
-## 🚀 Quick start
-
-```bash
-git clone https://github.com/Adarshukumar/AIDATA.git
-cd AIDATA
-bash arena-session-3b2d329a/bootstrap.sh      # 1. set up the environment
-cat  arena-session-3b2d329a/SESSION_STATE.md  # 2. see where things stand
-cat  python-projects/PROJECTS.md              # 3. browse the library
-```
-
-No dependencies, no build step, no server — plain files in Git.
-
----
-
-<div align="center">
-
-**Everything here is either my own work, or someone else's work with the credit kept.**
-
-*— Adarsh* 🐍
-
-</div>
+Earlier work — a project library, an audit, a curation package — is not in the working tree
+any more; it is reachable from Git history. The map is in `SETUP.md` §6.

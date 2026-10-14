@@ -1,2 +1,0 @@
-tkinter==8.6
-sqlite3==3.45.3
