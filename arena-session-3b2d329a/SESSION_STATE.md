@@ -7,9 +7,9 @@
 | Branch | `arena/732d199a-aidata` |
 | Repo | `AIDATA` |
 | Environment created | 2026-10-14T21:12:25Z by `bootstrap.sh` |
-| Last log entry | `0004-security-audit-and-redteam-eval.md` |
-| Status | 🟢 done — study library, audit skill, red-team eval all committed |
-| Updated (UTC) | 2026-10-14T22:00Z |
+| Last log entry | `0005-add-and-activate-ecc.md` |
+| Status | 🟡 working — adding + activating ECC (LOG-0005) |
+| Updated (UTC) | 2026-10-14T22:30Z |
 
 ## Last done
 
@@ -19,7 +19,8 @@
 
 - LOG-0003 done: 88 study skills in `skills/` (generator `artifacts/build_study_skills.py`).
 - LOG-0004 done: `skills/agent-skill-security-audit/` (scanner), `security/redteam-eval/` (29 canary cases + runner), `CREDITS.md`.
-- Waiting for the user: which parts to extend (more subjects, a real agent for the red-team run).
+- LOG-0005 in progress: ECC full copy to `third_party/ecc/` (MIT, keep LICENSE), project activation into `.claude/` with hooks (profile core).
+- Waiting for: nothing. Continue steps 2-5 of LOG-0005.
 
 ## Next actions
 
