@@ -8,10 +8,10 @@
 | Branch | `arena/3b2d329a-aidata` |
 | Repo | `Adarshukumar/AIDATA` |
 | Base commit | `ca68b43418a65df806e498797d7665cba2af0a46` |
-| Last log entry | `logs/0010-curation-prepared-blocked-on-access.md` |
+| Last log entry | `logs/0011-python-projects-folder.md` |
 | Current phase | **P8** — curation of `Adarshukumar/Python` built; ⛔ blocked on repo write access (403) |
 | Status | 🟡 waiting on user action: reconnect GitHub with access to `Adarshukumar/Python` |
-| Updated (UTC) | 2026-10-14T19:35Z |
+| Updated (UTC) | 2026-10-14T20:10Z |
 
 ## Last done (LOG-0007)
 
@@ -54,6 +54,14 @@
 - **Unblock option B:** user runs the same two scripts locally (needs his own `gh` login).
 - A ready branch (`arena/attribution-cleanup`, commit `609ac88`, 5,772 files) exists in
   `/tmp/px` — **scratch: wiped on restart; rebuildable in seconds with the script.**
+
+## Done since last state
+
+- `python-projects/` created and pushed in **this repo** (write access exists here):
+  783 files / 32 MB = `python-learning/` (his own 54) + `collections/python-mini-project`
+  (ndleah, MIT, 131 projects) + `collections/all-in-one-python-projects` (king04aman, MIT,
+  65 projects) + README/CREDITS. Rule applied: junk and assets > 2 MB dropped; the
+  ultra-popular (≥30k★) and unlicensed upstreams stay excluded and are linked instead.
 
 ## In progress
 

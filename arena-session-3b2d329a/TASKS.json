@@ -3,7 +3,7 @@
   "session": "3b2d329a",
   "branch": "arena/3b2d329a-aidata",
   "repo": "Adarshukumar/AIDATA",
-  "updated_at": "2026-10-14T19:35:00Z",
+  "updated_at": "2026-10-14T20:10:00Z",
   "statuses": [
     "todo",
     "in_progress",
@@ -259,6 +259,20 @@
       "phase": "P8-python-curation",
       "status": "blocked",
       "blocked_reason": "same 403; script ready: artifacts/scripts/vendor_collections.sh"
+    },
+    {
+      "id": "T8.6",
+      "title": "Create python-projects/ folder (his own files + 2 credited collections)",
+      "phase": "P8-python-curation",
+      "status": "done",
+      "finished_at": "2026-10-14T20:05:00Z",
+      "log": "logs/0011-python-projects-folder.md",
+      "artifacts": [
+        "python-projects/README.md",
+        "python-projects/CREDITS.md",
+        "python-projects/python-learning/",
+        "python-projects/collections/"
+      ]
     }
   ]
 }
