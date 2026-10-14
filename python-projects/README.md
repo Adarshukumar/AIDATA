@@ -5,8 +5,9 @@ small projects**, kept here with full credit to their authors.
 
 > **Who wrote what**
 > - `python-learning/` → **me** (Adarsh). My own lessons, notes and practice challenges.
-> - `collections/` → **other people's work**. Two open-source collections, each with its
->   upstream `LICENSE` file inside the folder. See [CREDITS.md](./CREDITS.md).
+> - `collections/` → **other people's work**. Two open-source collections, kept complete,
+>   each with its upstream `LICENSE` file inside the folder. See [CREDITS.md](./CREDITS.md)
+>   and the project index in [PROJECTS.md](./PROJECTS.md).
 
 ---
 
@@ -16,23 +17,25 @@ small projects**, kept here with full credit to their authors.
 python-projects/
 ├── README.md                                  ← this file
 ├── CREDITS.md                                 ← who wrote what, licenses, sources
+├── PROJECTS.md                                ← all 183 projects by category, one line each
 ├── python-learning/                           ← my own work (54 files)
 │   ├── 00_ROADMAP.md
 │   ├── 01_hello_world.py … 50_sqlite3_basics.py
 │   ├── PYTHON_CHEATSHEET.md
 │   └── PRACTICE_CHALLENGES.md
 └── collections/
+    ├── README.md                              ← index: categories + counts
     ├── python-mini-project/                   ← ndleah/python-mini-project (MIT)
-    │   ├── LICENSE
-    │   ├── SOURCE.md
-    │   └── … 131 project folders
+    │   ├── LICENSE · CODE_OF_CONDUCT.md · SOURCE.md
+    │   └── … 131 project folders (complete)
     └── all-in-one-python-projects/            ← king04aman/All-In-One-Python-Projects (MIT)
-        ├── LICENSE
-        ├── SOURCE.md
-        └── … 65 project folders
+        ├── LICENSE · CODE_OF_CONDUCT.md · CONTRIBUTING.md · SOURCE.md
+        └── … 65 project folders (complete)
 ```
 
-**779 files · ~32 MB**
+**860 files · ~190 MB** · every file from both collections is included — videos, PDFs,
+notebooks, datasets, images, `.github/` templates, `CODE_OF_CONDUCT.md` and the
+`CONTRIBUTING.md` guides. Nothing was skipped or dropped.
 
 ---
 
@@ -59,10 +62,11 @@ pip install -r requirements.txt 2>/dev/null; python *.py
 | [`python-mini-project`](./collections/python-mini-project) | **131** | [@ndleah](https://github.com/ndleah) + 100 contributors | MIT |
 | [`all-in-one-python-projects`](./collections/all-in-one-python-projects) | **65** | [@king04aman](https://github.com/king04aman) + contributors | MIT |
 
-Nothing from these collections was renamed, rewritten or re-attributed. The only edits are
-housekeeping: `.git`, `.github`, `IMG/` badges, `__pycache__`, `.DS_Store`, notebook
-checkpoints and assets larger than 2 MB were removed to keep the copy light. Each collection
-keeps its original `LICENSE` and has a `SOURCE.md` pointing at the upstream repository.
+Nothing here was renamed, rewritten or re-attributed. The only things not copied are
+machine-generated junk (bytecode `__pycache__`/`*.pyc`, macOS `.DS_Store`, notebook
+checkpoints) — every real file, including all media and data, is present. Each collection
+keeps its original `LICENSE`, `CODE_OF_CONDUCT.md` and `CONTRIBUTING.md`, plus a `SOURCE.md`
+pointing at the upstream repository.
 
 ## 🚫 What is *not* here (and why)
 

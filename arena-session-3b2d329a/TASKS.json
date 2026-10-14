@@ -3,7 +3,7 @@
   "session": "3b2d329a",
   "branch": "arena/3b2d329a-aidata",
   "repo": "Adarshukumar/AIDATA",
-  "updated_at": "2026-10-14T20:10:00Z",
+  "updated_at": "2026-10-14T21:05:00Z",
   "statuses": [
     "todo",
     "in_progress",
@@ -273,6 +273,34 @@
         "python-projects/python-learning/",
         "python-projects/collections/"
       ]
+    },
+    {
+      "id": "T8.7",
+      "title": "Restore all previously dropped files (complete collections)",
+      "phase": "P8-python-curation",
+      "status": "done",
+      "finished_at": "2026-10-14T20:40:00Z",
+      "log": "logs/0012-python-projects-complete-and-index.md"
+    },
+    {
+      "id": "T8.8",
+      "title": "Write PROJECTS.md + collections/README.md (modern UI index, 183 projects)",
+      "phase": "P8-python-curation",
+      "status": "done",
+      "finished_at": "2026-10-14T21:00:00Z",
+      "artifacts": [
+        "python-projects/PROJECTS.md",
+        "python-projects/collections/README.md",
+        "arena-session-3b2d329a/artifacts/scripts/build_projects_index.py"
+      ]
+    },
+    {
+      "id": "T8.9",
+      "title": "DECLINED: delete LICENSE files from collections; replace upstream READMEs",
+      "phase": "P8-python-curation",
+      "status": "blocked",
+      "blocked_reason": "policy/legal \u2014 MIT requires the copyright notice to stay with copies; removing it is infringement",
+      "log": "logs/0012-python-projects-complete-and-index.md"
     }
   ]
 }

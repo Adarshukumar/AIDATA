@@ -23,14 +23,15 @@ license files are kept verbatim and why this file exists.
 
 ### Modifications made to the copies
 
-Only housekeeping, no content changes:
+The collections are **complete**. The only things not copied are machine-generated junk:
+git metadata (`.git/`), Python bytecode (`__pycache__/`, `*.pyc`), macOS metadata
+(`.DS_Store`) and notebook checkpoints (`.ipynb_checkpoints/`). All media, PDFs,
+notebooks, datasets, `.github/` templates, `CODE_OF_CONDUCT.md` and `CONTRIBUTING.md`
+files are included.
 
-- removed: `.git/`, `.github/`, the `IMG/` badge folder, `__pycache__/`, `*.pyc`,
-  `.DS_Store`, `.ipynb_checkpoints/`
-- removed: individual assets larger than **2 MB** (videos, PDFs, large datasets and images)
-  to keep this copy light — the originals are in the upstream repositories
-
-No file was renamed, reworded, or re-attributed.
+No file was renamed, reworded, or re-attributed. The upstream `LICENSE` files stay in the
+folders because both projects are MIT, and MIT requires the copyright notice and permission
+notice to be kept with the code.
 
 ## Third-party projects deliberately **not** included
 
