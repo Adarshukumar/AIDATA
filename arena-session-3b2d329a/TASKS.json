@@ -1,0 +1,35 @@
+{
+  "schema": "arena-session-tasks/1",
+  "branch": "arena/3b2d329a-aidata",
+  "repo": "AIDATA",
+  "updated_at": "2026-10-14T21:08:00Z",
+  "statuses": ["todo", "in_progress", "blocked", "done"],
+  "tasks": [
+    {
+      "id": "T0.1",
+      "title": "Delete project content and reduce repo to README + SETUP.md + bootstrap.sh",
+      "phase": "P0-environment",
+      "status": "done",
+      "finished_at": "2026-10-14T21:05:00Z",
+      "log": "logs/0001-full-reset-and-main-setup.md",
+      "commit": "803c312"
+    },
+    {
+      "id": "T0.2",
+      "title": "Put SETUP.md + bootstrap.sh on main via PR",
+      "phase": "P0-environment",
+      "status": "done",
+      "finished_at": "2026-10-14T21:06:07Z",
+      "pr": "https://github.com/Adarshukumar/AIDATA/pull/1",
+      "log": "logs/0001-full-reset-and-main-setup.md"
+    },
+    {
+      "id": "T0.3",
+      "title": "Bootstrap the fresh environment",
+      "phase": "P0-environment",
+      "status": "done",
+      "finished_at": "2026-10-14T21:06:12Z",
+      "log": "logs/0001-full-reset-and-main-setup.md"
+    }
+  ]
+}
