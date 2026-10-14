@@ -1,52 +1,39 @@
-# CLAUDE.md — Session Memory & Working Rules
+# CLAUDE.md — rules for any agent working in this folder
 
-Guidance for **any** agent (Claude, GPT, Gemini, human) working inside
-`arena-session-3b2d329a/`. Adapted from Claude Code's `CLAUDE.md` memory-file convention:
-this file is read first, it is short on purpose, and it must stay true.
+1. **Real time.** After every logical step: write `logs/NNNN-slug.md`, update
+   `SESSION_STATE.md` (+ `TASKS.json`, + a row in `logs/INDEX.md`), then
+   `git add -A && git commit -m "session(NNNN): <slug>" && git push`.
+   Never batch work for later.
+2. **Verbatim commands** in the log, raw results — not summaries of summaries.
+3. **Log failures too.** A failed command with its error is the most useful line after a
+   disconnect.
+4. **Never rewrite** a published log entry, never renumber. Corrections are new entries.
+5. **`SESSION_STATE.md` must never be stale.** If it is, that is a bug: fix it in the same
+   commit as the entry that exposed it.
+6. **Checkpoint before long/risky work:** write down what you are about to attempt, commit,
+   then attempt.
+7. **No secrets** in this folder, ever.
+8. **After a sandbox restart:** `git fetch && git status -sb` first, reconcile with
+   `git reset --soft` (never `--hard`), then re-run `hooks/install.sh`.
 
-## 0. Context
+**Log template**
 
-- **Session:** `3b2d329a` · **Repo:** `Adarshukumar/AIDATA` · **Branch:** `arena/3b2d329a-aidata`
-- **Owner of the work:** Adarsh (GitHub `Adarshukumar`)
-- **Goal of the session:** keep a complete, real-time, Git-backed memory of everything the
-  agent does, so work is recoverable after any disconnect — and execute the tasks the user
-  gives, logging them as they happen.
+```markdown
+# LOG-NNNN — <title>
+| Field | Value |
+|---|---|
+| id | `NNNN` | ts_utc | YYYY-MM-DDTHH:MMZ | phase | status |
 
-## 1. Non-negotiable rules
+## Task · ## Plan · ## Commands run (verbatim) · ## Results · ## Decisions · ## Next
+```
 
-1. **Real-time commits.** After every meaningful step (a command batch, a finding, a
-   deliverable): write a log entry → update `SESSION_STATE.md` → `git add` → `git commit`
-   → `git push origin arena/3b2d329a-aidata`. Never wait for "the end".
-2. **Never rewrite history here.** Additive only; log files are append-only and numbered.
-3. **Log format is fixed.** Use the template in
-   `skills/session-memory/references/logging-format.md`. Include the *verbatim commands*
-   that were run and a short raw result, not a summary of a summary.
-4. **`SESSION_STATE.md` must always answer:** what was last done, what is happening now,
-   what comes next, what is blocked. If it is stale, that is a bug.
-5. **`TASKS.json` is the machine-readable truth** for task status; update it with every
-   log entry that changes a task's status.
-6. **No secrets.** Never write tokens/keys/credentials. GitHub auth is pre-configured in
-   the sandbox (`gh` CLI) — reference it, don't dump it.
-7. **Cite evidence.** Any claim about code/files must carry the command or API call that
-   produced it. Prefer blob-hash comparison over eyeballing.
-8. **Stay on this branch.** Push only to `arena/3b2d329a-aidata`.
+**Standing repository facts**
 
-## 2. Environment facts (for recovery)
+- `python-projects/collections/` is third-party MIT code: its `LICENSE`, `CREDITS.md` and
+  `SOURCE.md` files stay in place (license condition, not decoration).
+- `python-projects/python-learning/` is the owner's own work.
+- The GitHub token in this sandbox is scoped to `AIDATA`; writes to other repos (e.g.
+  `Adarshukumar/Python`) return 403 until the connection is extended.
+- GitHub API core limit: 5,150/hour — check `gh api rate_limit` before batch calls.
 
-- Sandbox workspace root: `/home/user`; this repo: `/home/user/AIDATA`.
-- Outbound network is allow-listed to: `github.com`, `codeload.github.com`,
-  `api.github.com`, `registry.npmjs.org`, `pypi.org`, `files.pythonhosted.org`.
-- `gh` CLI is authenticated as **Adarshukumar** (token injected by the platform).
-- `git`/`gh` are the tools for all GitHub work: `git` for local, `gh` for API/PRs.
-- Working files that must survive must live **inside the repo** — `/tmp` is scratch.
-
-## 3. What "done" means for a task
-
-A task is done only when: (a) its artifact is committed, (b) its log entry exists, (c) its
-status in `TASKS.json` is `done`, and (d) `SESSION_STATE.md` points at the next task.
-
-## 4. Style of the work log
-
-Keep entries honest and boring: what was asked, what was tried, what happened, what it
-costs (API calls/time), what remains. Failures get logged too — they are the most valuable
-part after a disconnect.
+Full guide: `SETUP.md`.

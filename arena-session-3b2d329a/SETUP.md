@@ -1,21 +1,16 @@
-# SETUP.md — the setup prompt, and how to work in this folder
+# SETUP.md — one file that sets up this entire environment
 
-Everything in `arena-session-3b2d329a/` is **plain files in Git**. There is no service to
-start, no database, no install step that can fail silently.
+This file is the whole setup. Read it, run the one command in §2, and the working
+environment exists: memory, real-time log, state pointer, rules, hook.
 
-This file has two jobs:
-
-1. **§0 — the prompt that created this folder** (verbatim), and what each line actually
-   means in practice.
-2. **§0b — how to work in it**: the instructions for anyone (agent or human) who joins.
-3. **§1 onward** — the full operational guide: activation, verification, recovery,
-   troubleshooting.
+**Files in this folder:** `SETUP.md` (this file) + `bootstrap.sh` (the script).
+Everything else is created by the script.
 
 ---
 
 ## §0 — The setup prompt (verbatim)
 
-This is the instruction that created this folder, quoted exactly as it was written:
+The instruction this environment exists to satisfy, quoted exactly as written:
 
 > okiew look do crete a folder in our main reposrity as this branch
 >
@@ -37,35 +32,81 @@ This is the instruction that created this folder, quoted exactly as it was writt
 > okk ??
 >
 > see everythin... in depend manner do first ebeire claude... first then do this task...
->
-> and do tell him how to work.. in it
 
-### What each line means in practice
+### What each line requires, and how this environment delivers it
 
-| The prompt says | Implemented as |
+| The prompt says | Delivered by |
 |---|---|
-| "create a folder… for this session, name it something" | `arena-session-3b2d329a/` — named after the session id in the branch (`arena/3b2d329a-aidata`) |
-| "everything… every command… pushed in that folder… commit directly, no wait, in real time" | The working loop in §0b: one log entry + one commit + one push per step. Nothing is batched for later. |
-| "so that even if we get disconnected we can recover our memory" | `SESSION_STATE.md` (resume pointer) + append-only `logs/` + `TASKS.json`. The drill in §7 was run against a fresh clone and passed (LOG-0006); a real sandbox restart was recovered with zero loss (LOG-0008). |
-| "work it in a nice structuring system" | Fixed layout: logs · memory · notes · commands · agents · skills · hooks · artifacts · audit |
-| "work entirely as claude-code, adapt its nature and features" | Study of that repo is in `notes/claude-code-study.md`; its shapes are mirrored here: `CLAUDE.md` memory file, YAML-frontmatter commands, subagents, skills, hooks with the exit-code contract (0 = allow, 2 = block), plugin manifest |
-| "every step pushed: what the task was, how you complete it, what's the plan, what's happening" | The log template (`skills/session-memory/references/logging-format.md`): Task · Plan · verbatim Commands · Results · Decisions · Next |
-| "see everything, in a dependent manner — first beware claude, first, then do this task" | Phase order in `PLAN.md`: P0 bootstrap → P1 Claude Code study → P2 memory guarantee → then the actual tasks (P3 audit onward) |
-| "and do tell him how to work in it" | §0b below — the same instructions a new agent gets on arrival |
+| "create a folder… for this session, name it something" | This folder — `arena-session-3b2d329a/`, named after the session id in the branch `arena/3b2d329a-aidata` |
+| "everything… every command… pushed in that folder… commit directly, no wait, in real time" | The loop in §3: every step writes a log entry and commits + pushes before the next step. The git hook logs commits automatically, even without an agent. |
+| "so that even if we get disconnected we can recover our memory" | `SESSION_STATE.md` (single resume pointer) + append-only `logs/` + `TASKS.json`. §5 is the recovery procedure. |
+| "work it in a nice structuring system" | The fixed layout §1 — every file has one job. |
+| "work entirely as anthropics/claude-code, adapt its nature and features" | `CLAUDE.md` as the memory/instruction file, YAML-frontmatter `commands/`, `agents/`, `skills/`, `hooks/` with the exit-code contract (0 = allow, 2 = block). §6 has the full mapping and where the full layer lives in history. |
+| "every step pushed: what the task was, how you complete it, the plan, what's happening" | The log template: Task · Plan · verbatim Commands · Results · Decisions · Next. §3. |
+| "see everything, in a dependent manner — first beware claude, first, then do this task" | Order of operations on arrival: read `CLAUDE.md` → `SESSION_STATE.md` → newest logs → `TASKS.json` → then start the task. §3. |
+| "and do tell him how to work in it" | §3 is written for exactly that: hand it to an agent, or follow it yourself. |
 
 ---
 
-## §0b — How to work in this folder
-
-**If you are an agent joining this session, do these five things before anything else:**
+## §1 — What this environment is
 
 ```
-1. READ   CLAUDE.md                 → the rules and the environment facts
-2. READ   SESSION_STATE.md          → last done · in progress · next · blocked
-3. READ   logs/INDEX.md, then the newest logs/000N-*.md in full
-                                    → the verbatim commands and results of the last work
-4. READ   TASKS.json                → the machine-readable task truth
-5. WORK   the loop below, one step at a time
+arena-session-3b2d329a/
+├── SETUP.md              ← this file: the prompt, the rules, the bootstrap  (always here)
+├── bootstrap.sh          ← creates/refreshes the environment below          (always here)
+│
+├── CLAUDE.md             ← rules + environment facts for any agent working here
+├── SESSION_STATE.md      ← LIVE POINTER: last done · in progress · next · blocked
+├── TASKS.json            ← machine-readable task truth
+├── logs/                 ← append-only work log: 000N-slug.md + INDEX.md + auto-commit-log.md
+├── memory/MEMORY.md      ← condensed long-term memory
+├── notes/                ← reasoning, lessons learned
+├── artifacts/            ← deliverables produced by work (scripts, reports)
+├── commands/             ← command definitions (resume · status · log · checkpoint)
+├── agents/               ← role definitions (memory-keeper · auditor)
+└── hooks/                ← install.sh + the git pre-commit logger
+```
+
+Design rules baked into the environment:
+
+1. **Git is the only state store.** If it isn't committed, it doesn't exist.
+2. **Append-only logs.** History is never rewritten, so a disconnect can't corrupt it.
+3. **One resume pointer.** `SESSION_STATE.md` is the single file a returning agent reads.
+4. **Evidence over memory.** Log entries carry verbatim commands, not summaries.
+5. **Failures are content.** A failed command with its error is logged like a success.
+
+---
+
+## §2 — Set it up (one command)
+
+```bash
+bash arena-session-3b2d329a/bootstrap.sh
+```
+
+What it does:
+
+- creates the tree in §1 and the starter files (`CLAUDE.md`, `SESSION_STATE.md`,
+  `TASKS.json`, `logs/INDEX.md`, `memory/MEMORY.md`, the `commands/` `agents/` `skills/`
+  hints, `hooks/`)
+- installs the **git pre-commit hook** so every commit on this branch appends a line to
+  `logs/auto-commit-log.md` — the trail survives even if no agent is running
+- **never overwrites existing state** — re-running it is safe and only fills in what is
+  missing (that is also the fix after a sandbox restart, which clears `.git/hooks/`)
+
+Requirements: `bash`, `git`, `python3`. Nothing else. No server, no dependencies.
+
+---
+
+## §3 — How to work in it
+
+**If you are an agent joining this environment, do this in order:**
+
+```
+1. READ  CLAUDE.md            the rules and the environment facts
+2. READ  SESSION_STATE.md     last done · in progress · next · blocked
+3. READ  logs/INDEX.md, then the newest logs/000N-*.md in full (verbatim commands + results)
+4. READ  TASKS.json           the machine-readable task truth
+5. WORK  the loop below
 ```
 
 **The loop — this is the whole method:**
@@ -73,35 +114,52 @@ This is the instruction that created this folder, quoted exactly as it was writt
 ```
 DO the step
    ↓
-write logs/NNNN-slug.md             (next free number; template in skills/session-memory/references/logging-format.md)
+write logs/NNNN-slug.md          (next free number; template below)
    ↓
-update SESSION_STATE.md             (last done / in progress / next actions / blocked)
-update TASKS.json  (+ logs/INDEX.md row)
+update SESSION_STATE.md          (last done / in progress / next actions / blocked)
+update TASKS.json  + a row in logs/INDEX.md
    ↓
 git add -A
 git commit -m "session(NNNN): <slug>"
 git push origin arena/3b2d329a-aidata
 ```
 
+**Log entry template** (also in `CLAUDE.md`):
+
+```markdown
+# LOG-NNNN — <short title>
+| Field | Value |
+|---|---|
+| id | `NNNN` |
+| ts_utc | YYYY-MM-DDTHH:MMZ |
+| phase | PX — <name> |
+| status | ✅ done / 🟡 partial / ❌ failed / ⛔ blocked |
+
+## Task        — what was asked (quote the user when possible)
+## Plan        — numbered steps, as intended before running them
+## Commands run (verbatim)  — exact, copy-pasteable
+## Results     — raw numbers/outputs/errors
+## Decisions   — decision, reason, rejected alternative
+## Next        — what happens next
+```
+
 **Rules that are not optional:**
 
 1. **Real time.** One logical step = one log entry = one commit = one push. Never batch.
-2. **Verbatim commands** in the log, raw results — not summaries of summaries.
-3. **Log failures too.** A failed command with its error is the most useful line after a
-   disconnect. See `logs/0004` and `notes/lessons.md`.
-4. **Never rewrite** a published log entry, and never renumber. Corrections are new entries
-   that cite the old one.
-5. **`SESSION_STATE.md` must never be stale.** If it is, that is a bug: fix it in the same
-   commit as the log entry that exposed it.
-6. **Before anything long or risky** (a clone, 100+ API calls): write what you are about to
-   attempt, commit it, *then* attempt it — the checkpoint variant
-   (`commands/commit-memory.md`).
+2. **Verbatim commands** in the log; raw results, not summaries of summaries.
+3. **Log failures too** — they are the most useful lines after a disconnect.
+4. **Never rewrite** a published entry and never renumber; corrections are new entries.
+5. **`SESSION_STATE.md` must never be stale.** If it is, that's a bug — fix it in the same
+   commit as the entry that exposed it.
+6. **Checkpoint before long/risky work:** write what you are about to attempt, commit it,
+   then attempt it.
 7. **No secrets** in this folder, ever.
-8. **After a sandbox restart:** `git fetch && git status -sb` first (local `.git` may be
-   behind origin), reconcile with `reset --soft` — never `--hard` — then re-run
-   `hooks/install.sh` (hooks live in `.git/`, which is not part of the tree).
+8. **After a sandbox restart:** run `git fetch && git status -sb` first (local `.git` can
+   be behind origin), reconcile with `git reset --soft` — never `--hard` — then re-run
+   `bash arena-session-3b2d329a/bootstrap.sh` to restore the git hook.
 
-**Using the commands** (`commands/` — Claude Code format):
+**Using the command files** (`commands/`, Claude Code format — YAML frontmatter, a
+`## Context` block whose `` !`cmd` `` lines are shell to run, then `## Your task`):
 
 | File | Purpose |
 |---|---|
@@ -109,195 +167,78 @@ git push origin arena/3b2d329a-aidata
 | `status.md` | one screen: state + tasks + last log + uncommitted work |
 | `log.md` | write the next numbered entry and commit it |
 | `commit-memory.md` | checkpoint before a long/risky operation |
-| `audit-python-repo.md` | re-run the provenance audit |
 
-Copy `commands/` into `.claude/commands/` to use them as slash commands in Claude Code;
-paste them into any other agent's chat as prompts; run the listed commands by hand if you
-are a human. The files are runbooks either way.
-
----
-
-## 1. What you get
-
-| Capability | Where it lives | Active out of the box? |
-|---|---|---|
-| Real-time work log (every step, verbatim commands) | `logs/000N-*.md` + `logs/INDEX.md` | ✅ yes (written by the agent each step) |
-| Live resume pointer (last done / now / next / blocked) | `SESSION_STATE.md` | ✅ yes |
-| Machine-readable task truth | `TASKS.json` | ✅ yes |
-| Rules for any agent working here | `CLAUDE.md` | ✅ yes |
-| Long-term condensed memory | `memory/MEMORY.md` | ✅ yes |
-| Slash-command definitions | `commands/*.md` | ✅ yes (as documents) |
-| Subagent definitions | `agents/*.md` | ✅ yes (as documents) |
-| Skill + references | `skills/session-memory/` | ✅ yes |
-| **Auto-log of every commit** | `hooks/pre_commit_log.py` → `.git/hooks/pre-commit` | ⚠️ **needs one command** (step 3) |
-| Agent-runtime hooks (session start / tool guards) | `hooks/hooks.json` | ⚠️ only inside a runtime that reads this format |
-| Plugin manifest | `.claude-plugin/plugin.json` | informational |
+Copy them to `.claude/commands/` to use them as slash commands in Claude Code; paste them
+into any other agent's chat as prompts; run the listed commands by hand if you're a human.
+The files are runbooks either way.
 
 ---
 
-## 2. Step 0 — get the repo
+## §4 — Standing facts about this repository
 
-```bash
-git clone https://github.com/Adarshukumar/AIDATA.git
-cd AIDATA
-git checkout arena/3b2d329a-aidata        # the session branch
-```
+Rules that apply to any work here, regardless of task:
 
-## 3. Step 1 — activate the always-on hook (the only required command)
+- **`python-projects/collections/` is third-party open-source code** (both collections are
+  MIT). Their `LICENSE` files, `CREDITS.md` and `SOURCE.md` files stay in place — that is
+  the condition of the MIT license, not decoration. Files may be *added* to those folders;
+  authors and licenses are not stripped from them.
+- **`python-projects/python-learning/` is the owner's own work** and is not third-party
+  material.
+- **`Adarshukumar/Python`** (the separate Python repo) is writable only when the GitHub
+  connection grants access to that repository; the default sandbox token is scoped to
+  `AIDATA` and returns 403 on writes there.
+- **GitHub API budget:** core limit 5,150 requests/hour. Check
+  `gh api rate_limit --jq '.resources.core.remaining'` before any batch of calls.
 
-```bash
-bash arena-session-3b2d329a/hooks/install.sh
-# installed: .git/hooks/pre-commit → logs every commit to logs/auto-commit-log.md
-```
+---
 
-From now on **every commit on this branch appends a line to
-`arena-session-3b2d329a/logs/auto-commit-log.md`** (timestamp + staged files), even a
-commit made by a human with no agent attached. That is the safety net: even if the agent
-forgets to log, the commits still leave a trail.
+## §5 — Recovery
 
-> The hook is local to your clone (`.git/hooks/` is never committed). Re-run the installer
-> after a fresh clone. It is idempotent.
-
-## 4. Step 2 — verify the system
-
-```bash
-cd arena-session-3b2d329a
-
-# a) state file is fresh
-head -20 SESSION_STATE.md
-
-# b) the index lists every entry, and the newest entry exists
-tail -5 logs/INDEX.md
-ls logs/ | grep -E '^[0-9]{4}-' | sort | tail -1
-
-# c) tasks parse as JSON
-python3 -m json.tool TASKS.json > /dev/null && echo "TASKS.json OK"
-
-# d) hook is installed and executable
-test -x ../.git/hooks/pre-commit && echo "hook installed"
-
-# e) audit deliverables are present
-ls audit/
-```
-
-All five should succeed. If (d) fails, re-run step 1.
-
-## 5. Step 3 — the working loop (this is the whole method)
-
-```
-DO the step
-   ↓
-write logs/NNNN-slug.md        (template: skills/session-memory/references/logging-format.md)
-   ↓
-update SESSION_STATE.md + TASKS.json + logs/INDEX.md
-   ↓
-git add -A && git commit -m "session(NNNN): <slug>" && git push origin arena/3b2d329a-aidata
-```
-
-**Real time.** Not at the end of the session. One logical step = one commit.
-
-Before anything long or risky (a clone, 100+ API calls), run the checkpoint variant:
-write down what you are about to attempt, commit it, *then* attempt it.
-
-## 6. Step 4 — using the commands (any agent, any tool)
-
-The files in `commands/` are written in Claude Code's format (YAML frontmatter with
-`description` / `allowed-tools`, then a `## Context` block whose `` !`cmd` `` lines are
-shell that gets executed, then `## Your task`). Three ways to use them:
-
-1. **Inside Claude Code** — copy `commands/` to `.claude/commands/` at a repo root, then
-   type `/resume`, `/status`, `/log`, `/audit-python-repo`, `/commit-memory`.
-2. **Any other agent (Cursor, Copilot, GPT, …)** — paste the file's content into the chat
-   as the prompt. The `!`cmd`` lines document exactly what context to gather.
-3. **A human** — just run the commands listed in each file's Context block by hand; the
-   files double as runbooks.
-
-| Command | Use it when |
-|---|---|
-| `/resume` | you (or a fresh agent) are resuming after a disconnect or a gap |
-| `/status` | you want one screen: state + tasks + last log + uncommitted work |
-| `/log` | you finished a step and want the entry + commit done properly |
-| `/commit-memory` | before a long/risky operation |
-| `/audit-python-repo` | re-run the provenance audit of `Adarshukumar/Python` |
-
-## 7. Step 5 — recovery after a disconnect
+**After a disconnect (new session):**
 
 ```bash
 git fetch origin && git checkout arena/3b2d329a-aidata && git pull
-cat arena-session-3b2d329a/SESSION_STATE.md      # last done / now / next / blocked
-cat arena-session-3b2d329a/CLAUDE.md             # the rules
-ls -t arena-session-3b2d329a/logs | head          # newest entries
+cat arena-session-3b2d329a/SESSION_STATE.md
+cat arena-session-3b2d329a/CLAUDE.md
+ls -t arena-session-3b2d329a/logs | head
 cat arena-session-3b2d329a/logs/$(ls arena-session-3b2d329a/logs | grep -E '^[0-9]{4}-' | sort | tail -1)
-python3 -m json.tool arena-session-3b2d329a/TASKS.json | tail -40
 ```
 
-The full drill with pass criteria: `skills/session-memory/references/recovery.md`.
-It was executed against a fresh clone on 2026-10-14 and passed (LOG-0006).
+**After a sandbox restart:** `.git/hooks/` and `/tmp` are gone, and local `.git` may be
+behind origin. Run `git fetch && git status -sb` first, reconcile with `reset --soft`, then
+`bash arena-session-3b2d329a/bootstrap.sh` (re-installs the hook). Rebuild any scratch from
+`artifacts/` scripts rather than trying to restore `/tmp`.
 
-## 8. Step 6 — the agent-runtime hooks (optional, for Claude Code-style runtimes)
-
-`hooks/hooks.json` declares four events in Claude Code's format:
-
-| Event | Script | Effect |
-|---|---|---|
-| `SessionStart` | `session_start_context.sh` | prints `SESSION_STATE.md` + newest log so a resumed session starts with memory loaded |
-| `PreToolUse` (Bash) | `guard_destructive.py` | **blocks** (exit 2) force-push, `reset --hard`, `filter-branch`, branch deletion, switching to `main` |
-| `PostToolUse` (Bash) | `remember_command.py` | appends every Bash command to `memory/command-history.md` |
-| `Stop` | `stop_checkpoint.sh` | warns if the memory folder has uncommitted changes |
-
-To wire them into a Claude Code project, make a `.claude/settings.json` that points at
-these scripts (matcher + `type: command`), e.g.:
-
-```json
-{
-  "hooks": {
-    "PreToolUse": [
-      { "matcher": "Bash",
-        "hooks": [{ "type": "command",
-                    "command": "python3 $CLAUDE_PROJECT_DIR/arena-session-3b2d329a/hooks/guard_destructive.py" }] }
-    ]
-  }
-}
-```
-
-They are inert outside such a runtime — nothing breaks if you ignore them. The exit-code
-contract is the real Claude Code one: **0 = allow, 2 = block and send stderr back to the
-model.**
-
-## 9. Daily cheat-sheet
+**Recovering anything from before the reset** — all earlier content is still in Git
+history (full clone required; `--depth 1` clones do not have it):
 
 ```bash
-# am I safe? (nothing uncommitted)
-git status --short -- arena-session-3b2d329a
-
-# what happened last?
-tail -3 arena-session-3b2d329a/logs/INDEX.md
-
-# what's next?
-sed -n '/## Next actions/,/## Open/p' arena-session-3b2d329a/SESSION_STATE.md
-
-# push memory only
-git add arena-session-3b2d329a && git commit -m "session(checkpoint): ..." && git push
+git log --oneline --all | less        # every past step
+git checkout 9d94765 -- arena-session-3b2d329a   # the complete pre-reset folder
+git checkout e18e1d3 -- arena-session-3b2d329a/audit   # the provenance audit + report
+git checkout 6e70b0c -- arena-session-3b2d329a/artifacts  # curation scripts (CREDITS.md, PR runners)
+git checkout 56e0a44 -- python-projects/PROJECTS.md      # the project index generator output
 ```
 
-## 10. Troubleshooting
+---
 
-| Symptom | Cause | Fix |
+## §6 — Where the earlier work lives (history map)
+
+| What | Commit | Path it was at |
 |---|---|---|
-| `install.sh` says "not found" | running from the wrong directory | run it from the repo root: `bash arena-session-3b2d329a/hooks/install.sh` |
-| `logs/auto-commit-log.md` not growing | hook not installed, or committing on another branch | re-run step 1; the hook only logs branch `arena/3b2d329a-aidata` |
-| `SESSION_STATE.md` looks stale | a step was committed without updating it | treat as a bug: write a log entry, fix the state file, commit |
-| Log numbers skipped/duplicated | two steps raced | never renumber; add a correction entry that cites the old one |
-| `/tmp` scratch was wiped (sandbox restart) | expected — `/tmp` is not persisted | rebuild with `artifacts/scripts/audit_clone_heads.sh` (~20 s) + `audit_classify.py`; then re-probe |
-| GitHub API returns 403 rate-limit | 5,150/hr exhausted | `gh api rate_limit --jq '.resources.core.reset'` and wait; keep batch sizes small |
+| Complete pre-reset environment (15 log entries, all docs) | `9d94765` | `arena-session-3b2d329a/` |
+| Provenance audit of `Adarshukumar/Python` (9,007 files classified, report, files.csv) | `e18e1d3` | `arena-session-3b2d329a/audit/` |
+| Curation package (`CREDITS.md`, honest `README.md`, PR runner scripts) | `6e70b0c` | `arena-session-3b2d329a/artifacts/{curation,scripts}/` |
+| Project index generator + `PROJECTS.md` | `56e0a44` | `arena-session-3b2d329a/artifacts/scripts/build_projects_index.py` |
+| The full Claude Code-style layer (commands, agents, skills, hooks, plugin manifest) | `9d94765` | `arena-session-3b2d329a/{commands,agents,skills,hooks,.claude-plugin}/` |
 
-## 11. Design rules (why it is built this way)
+The reset itself (what was removed, and why the environment was rebuilt clean) is recorded
+in `logs/0001-reset-and-bootstrap.md`.
 
-1. **Git is the only state store.** If it isn't committed, it doesn't exist.
-2. **Append-only logs.** History is never rewritten, so a disconnect can't corrupt it.
-3. **One resume pointer.** `SESSION_STATE.md` is the single file a fresh agent must read.
-4. **Evidence over memory.** Log entries carry verbatim commands, not summaries of
-   summaries — that is what makes resume actually work.
-5. **Failures are first-class.** See `logs/0004` + `notes/lessons.md`.
-6. **Formats borrowed from Claude Code, content is honest.** The folder *is* a memory
-   system; it does not claim to be Claude Code.
+---
+
+<div align="center">
+
+**One file to read, one command to run, everything else is created.**
+
+</div>
