@@ -9,3 +9,4 @@ Newest entries at the bottom. One entry per logical step. **Never renumber, neve
 | 0003 | [python-audit-inventory](0003-python-audit-inventory.md) | 2026-10-14T16:36Z | P3 | 🟡 | Inventory + folder→upstream map (27 rows) of `Adarshukumar/Python`. |
 | 0004 | [audit-pipeline](0004-audit-pipeline.md) | 2026-10-14T17:16Z | P3 | 🟡 | 3 failures (API quota burn, rev-list hang, path C-quoting) → fixed; all 9,007 files classified locally: 8,739 identical / 209 old-rev? / 3 gone / 56 original. |
 | 0005 | [first-full-report](0005-first-full-report.md) | 2026-10-14T17:40Z | P3 | ✅ | Audit complete: 9007/9007 files explained (8739 identical, 176 old rev, 33 CRLF→LF, 3 removed upstream, 56 original). Deliverables + licenses written. |
+| 0006 | [memory-consolidation](0006-memory-consolidation.md) | 2026-10-14T17:47Z | P5 | ✅ | MEMORY.md condensed with final verdict; cold-resume drill executed on a fresh clone — PASSED. |

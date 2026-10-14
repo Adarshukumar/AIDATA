@@ -8,10 +8,10 @@
 | Branch | `arena/3b2d329a-aidata` |
 | Repo | `Adarshukumar/AIDATA` |
 | Base commit | `ca68b43418a65df806e498797d7665cba2af0a46` |
-| Last log entry | `logs/0005-first-full-report.md` |
-| Current phase | **P3 done** → P5 (memory consolidation + resume drill) |
+| Last log entry | `logs/0006-memory-consolidation.md` |
+| Current phase | **P5 done** — audit + memory complete; awaiting user decisions |
 | Status | 🟢 active — audit complete, 0 unresolved files |
-| Updated (UTC) | 2026-10-14T17:41Z |
+| Updated (UTC) | 2026-10-14T17:47Z |
 
 ## Last done (LOG-0005)
 

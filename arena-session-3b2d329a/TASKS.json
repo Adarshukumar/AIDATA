@@ -3,7 +3,7 @@
   "session": "3b2d329a",
   "branch": "arena/3b2d329a-aidata",
   "repo": "Adarshukumar/AIDATA",
-  "updated_at": "2026-10-14T17:41:00Z",
+  "updated_at": "2026-10-14T17:47:00Z",
   "statuses": [
     "todo",
     "in_progress",
@@ -119,7 +119,11 @@
       "id": "T5.1",
       "title": "Consolidate memory/MEMORY.md; resume drill",
       "phase": "P5-memory-consolidation",
-      "status": "todo"
+      "status": "done",
+      "finished_at": "2026-10-14T17:45:00Z",
+      "artifacts": [
+        "arena-session-3b2d329a/memory/MEMORY.md"
+      ]
     },
     {
       "id": "T3.7",
@@ -158,6 +162,21 @@
       "artifacts": [
         "arena-session-3b2d329a/audit/licenses.md"
       ]
+    },
+    {
+      "id": "T5.2",
+      "title": "Cold-resume drill on a fresh clone",
+      "phase": "P5-memory-consolidation",
+      "status": "done",
+      "finished_at": "2026-10-14T17:46:00Z",
+      "log": "logs/0006-memory-consolidation.md"
+    },
+    {
+      "id": "T5.3",
+      "title": "Hand-off summary for the user",
+      "phase": "P5-memory-consolidation",
+      "status": "in_progress",
+      "started_at": "2026-10-14T17:47:00Z"
     }
   ]
 }
