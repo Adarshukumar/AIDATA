@@ -41,3 +41,11 @@
   - arena-session-3b2d329a/logs/INDEX.md
   - arena-session-3b2d329a/memory/MEMORY.md
 
+### 2026-10-14T19:23:23Z — 5 file(s) staged
+
+  - arena-session-3b2d329a/SESSION_STATE.md
+  - arena-session-3b2d329a/TASKS.json
+  - arena-session-3b2d329a/logs/0008-sandbox-restart-recovery.md
+  - arena-session-3b2d329a/logs/INDEX.md
+  - arena-session-3b2d329a/notes/lessons.md
+

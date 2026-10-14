@@ -8,10 +8,10 @@
 | Branch | `arena/3b2d329a-aidata` |
 | Repo | `Adarshukumar/AIDATA` |
 | Base commit | `ca68b43418a65df806e498797d7665cba2af0a46` |
-| Last log entry | `logs/0007-setup-and-two-repo-analysis.md` |
+| Last log entry | `logs/0008-sandbox-restart-recovery.md` |
 | Current phase | **P6** — new deliverables done; awaiting user choice on repo cleanup |
 | Status | 🟢 active — audit complete, 0 unresolved files |
-| Updated (UTC) | 2026-10-14T18:30Z |
+| Updated (UTC) | 2026-10-14T18:36Z |
 
 ## Last done (LOG-0007)
 
@@ -36,6 +36,12 @@
   (AMBER: CC BY-SA, GPL, CC BY, custom, WTFPL), 20 MIT-family (GREEN).
 - Deliverables committed: `audit/AUDIT_REPORT.md`, `audit/files.csv` (9,007 rows),
   `audit/originals.md`, `audit/modified-files.md`, `audit/licenses.md`, plus 6 scripts.
+
+## Operational notes
+
+- A sandbox restart occurred between LOG-0007 and its push: `/tmp` wiped, local `.git`
+  reset to `ca68b43`. Recovered with `git fetch` + `git reset --soft` (LOG-0008). **After any
+  restart: `git fetch && git status -sb` first, and re-run `hooks/install.sh`.**
 
 ## In progress
 

@@ -33,3 +33,15 @@ path matching for every non-ASCII file (here: exactly one, but it broke the fold
 
 Before a batch: `gh api rate_limit --jq '.resources.core.remaining'` and compare with the
 planned number of calls. `audit_probe.sh` now refuses to start if quota < needed + 50.
+
+### 5. After a sandbox restart, local `.git` may be behind origin
+
+Between turns the local repository was reset to the base commit while the working tree was
+restored — pushing then failed with `! [rejected] … (fetch first)`, and `.git/hooks/` was
+empty again.
+
+**Rule:** first commands of a resumed turn: `git fetch && git status -sb`. If the branch is
+behind, reconcile with `git reset --soft origin/<branch>` **after** checking
+`git diff --stat HEAD origin/<branch>` shows only the intended changes. Never `--hard`.
+Then re-run `bash arena-session-3b2d329a/hooks/install.sh` (hooks live in `.git/`, which is
+not part of the tree).

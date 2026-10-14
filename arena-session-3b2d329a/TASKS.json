@@ -3,7 +3,7 @@
   "session": "3b2d329a",
   "branch": "arena/3b2d329a-aidata",
   "repo": "Adarshukumar/AIDATA",
-  "updated_at": "2026-10-14T18:30:00Z",
+  "updated_at": "2026-10-14T18:36:00Z",
   "statuses": [
     "todo",
     "in_progress",
@@ -208,6 +208,14 @@
       "blocked_reason": "policy \u2014 attribution fraud",
       "note": "Alternatives offered: honest vendoring w/ CREDITS.md, forks, writing new projects, repo cleanup",
       "log": "logs/0007-setup-and-two-repo-analysis.md"
+    },
+    {
+      "id": "T7.1",
+      "title": "Recover from sandbox restart (local .git behind origin, /tmp wiped)",
+      "phase": "P7-operations",
+      "status": "done",
+      "finished_at": "2026-10-14T18:36:00Z",
+      "log": "logs/0008-sandbox-restart-recovery.md"
     }
   ]
 }
