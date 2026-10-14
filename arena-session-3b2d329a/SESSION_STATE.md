@@ -7,8 +7,8 @@
 | Branch | `arena/732d199a-aidata` |
 | Repo | `AIDATA` |
 | Environment created | 2026-10-14T21:12:25Z by `bootstrap.sh` |
-| Last log entry | `0001-bootstrap-setup.md` |
-| Status | 🟢 ready — environment set up |
+| Last log entry | `0002-skills-research-and-build.md` |
+| Status | 🟡 working — building study skills + security eval |
 | Updated (UTC) | 2026-10-14T21:12:25Z |
 
 ## Last done
@@ -17,7 +17,7 @@
 
 ## In progress
 
-- Nothing. Waiting for the next task from the user; log it as `logs/0002-<slug>.md`.
+- LOG-0002: research done, scope agreed. Building `skills/study-*` (generator in `artifacts/`), then `skills/agent-skill-security-audit/` and `security/redteam-eval/`.
 
 ## Next actions
 
