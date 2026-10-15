@@ -10,3 +10,4 @@ Newest at the bottom. One entry per logical step. **Never renumber, never rewrit
 | 0004 | [security-audit-and-redteam-eval](0004-security-audit-and-redteam-eval.md) | 2026-10-14T22:00Z | P1 | ✅ | Agent-skill audit scanner + skill; 29-case canary red-team eval + runner; CREDITS.md |
 | 0005 | [add-and-activate-ecc](0005-add-and-activate-ecc.md) | 2026-10-14T22:30Z | P2 | ✅ | Reviewed affaan-m/ECC (MIT, 2.2.3); scanner false-positives fixed; plan for vendor + project activation with hooks |
 | 0006 | [setup-md-everything-and-activation](0006-setup-md-everything-and-activation.md) | 2026-10-14T23:30Z | P3 | ✅ | SETUP.md §7 inventory, §8 runbook, §9 working agreement; `bootstrap.sh --activate`; README + CLAUDE.md pointers |
+| 0007 | [audit-python-repo-provenance](0007-audit-python-repo-provenance.md) | 2026-10-15T07:45Z | P4 | ✅ | `Adarshukumar/Python`: 97.0% (8,741/9,007) byte-identical to 26 upstream repos; 2 folders are owner's own; licensing gaps noted |
